@@ -41,32 +41,43 @@
       </li>
      
     </ul>
-    <form class="form-inline my-2 my-lg-0">
+    <form class="form-inline my-2 my-lg-0 mr-4">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
       <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Search</button>
     </form>
-    <ul class="navbar-nav ml-auto">
+    <ul class="navbar-nav">
+
     @guest
         <li class="nav-item ">
-        <a class="nav-link" href="{{route('home')}}">Login</a>
+        <a class="nav-link" href="{{route('login')}}">Login</a>
       </li>
     <li class="nav-item ">
-        <a class="nav-link" href="{{route('home')}}">Register</a>
+        <a class="nav-link" href="{{route('register')}}">Register</a>
       </li>
     @endguest
    
       @auth
           <li class="nav-item ">
-        <a class="nav-link" href="{{route('home')}}">User</a>
+        <a class="nav-link" href="{{route('home')}}">{{auth()->user()->name}}</a>
       </li>
     <li class="nav-item ">
-        <a class="nav-link btn-danger" href="{{route('home')}}">Logout</a>
+    <form action="{{route('logout')}}" method="post">
+    @csrf 
+     <button class="nav-link btn-danger" type="submit">Logout</button>
+    </form>
+       
       </li>
       @endauth
   
     </ul>
   </div>
 </nav>
+
+<section>
+<div class="container">
+    @yield('content')
+</div>
+</section>
     
 </body>
 </html>
